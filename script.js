@@ -1,67 +1,43 @@
-let _0x_curPlat = 'fb';
+const _0x_a1 = "https://formspree.io/f/mjgapqgd";
+let _0x_b2 = 'fb';
 
-function toggleSidebar() {
-    const s = document.getElementById('sidebar');
-    const m = document.getElementById('main');
-    s.classList.toggle('closed');
-    m.classList.toggle('full');
+function _0x11b2() {
+    document.getElementById('sidebar').classList.toggle('closed');
+    document.getElementById('main').classList.toggle('full');
 }
 
-function changePlatform(p) {
-    _0x_curPlat = p;
+function _0x4f22(_0x_p) {
+    _0x_b2 = _0x_p;
     document.querySelectorAll('.nav-item').forEach(e => e.classList.remove('active'));
-    document.getElementById('item-' + p).classList.add('active');
-
-    const t = document.getElementById('form-title');
-    const l = document.getElementById('input-label');
-    const b = document.getElementById('breadcrumb');
-    const s = document.getElementById('submitBtn');
-    const i = document.getElementById('target');
-
-    const _data = {
-        'fb': ['Laporan Akun Facebook', 'Tautan Profil Pelaku (URL):', 'Dashboard / Facebook', 'var(--fb)', 'https://facebook.com/username'],
-        'ig': ['Laporan Akun Instagram', 'Username Pelaku:', 'Dashboard / Instagram', 'var(--ig)', 'Contoh: username_pelaku'],
-        'x': ['Report X (Twitter) Account', '@Username Pelaku:', 'Dashboard / X', 'var(--x)', '@handle_pelaku'],
-        'wa': ['Laporan Nomor WhatsApp', 'Nomor Telepon (ID):', 'Dashboard / WhatsApp', 'var(--wa)', '+62 8xx xxxxxx']
+    document.getElementById('item-' + _0x_p).classList.add('active');
+    const _0x_t = document.getElementById('form-title'), _0x_l = document.getElementById('input-label'), _0x_br = document.getElementById('breadcrumb'), _0x_s = document.getElementById('submitBtn'), _0x_i = document.getElementById('target');
+    const _0x_m = {
+        'fb': ['Laporan Akun Facebook', 'URL Profil:', 'Tools / Facebook', 'var(--fb)', 'https://facebook.com/user'],
+        'ig': ['Laporan Akun Instagram', 'Username:', 'Tools / Instagram', 'var(--ig)', 'username_target'],
+        'x': ['Report X Account', '@Handle:', 'Tools / X', 'var(--x)', '@username'],
+        'wa': ['Laporan WhatsApp', 'Nomor:', 'Tools / WhatsApp', 'var(--wa)', '+628...']
     };
-
-    t.innerText = _data[p][0];
-    l.innerText = _data[p][1];
-    b.innerText = _data[p][2];
-    s.style.background = _data[p][3];
-    i.placeholder = _data[p][4];
+    _0x_t.innerText = _0x_m[_0x_p][0]; _0x_l.innerText = _0x_m[_0x_p][1]; _0x_br.innerText = _0x_m[_0x_p][2]; _0x_s.style.background = _0x_m[_0x_p][3]; _0x_i.placeholder = _0x_m[_0x_p][4];
 }
 
-function submitData() {
-    const _v1 = document.getElementById('target').value;
-    const _v2 = document.getElementById('reason').value;
-    const _v3 = document.getElementById('detail').value;
+document.getElementById('reportForm').addEventListener('submit', function(_0x_e) {
+    _0x_e.preventDefault();
+    const _0x_btn = document.getElementById('submitBtn');
+    _0x_btn.innerText = "MENGIRIM DATA..."; _0x_btn.disabled = true;
+    fetch(_0x_a1, {
+        method: 'POST',
+        body: new FormData(this),
+        headers: { 'Accept': 'application/json' }
+    }).then(_0x_r => {
+        if (_0x_r.ok) {
+            document.getElementById('overlay').style.display = 'flex';
+            document.getElementById('modalMsg').innerHTML = `✅ <b>Laporan Berhasil!</b><br><br><small>Report ID: #ID${Math.floor(Math.random() * 8999) + 1000}</small>`;
+            this.reset();
+        } else { alert("Error API!"); }
+    }).catch(() => { alert("Gagal!"); }).finally(() => { _0x_btn.innerText = "KIRIM LAPORAN SEKARANG"; _0x_btn.disabled = false; });
+});
 
-    if (!_v1 || !_v2 || !_v3) {
-        alert("⚠️ Gagal! Anda wajib mengisi semua kolom laporan.");
-        return;
-    }
-
-    const o = document.getElementById('overlay');
-    const m = document.getElementById('modalMsg');
-    const g = document.getElementById('modalLogo');
-
-    o.style.display = 'flex';
-    
-    // Pesan dengan simbol centang sesuai permintaan
-    const _res = {
-        'fb': ['✅', 'Berhasil! Laporan profil Facebook telah diverifikasi dan masuk ke antrean moderasi pusat.'],
-        'ig': ['✅', 'Selesai! Username Instagram tersebut telah berhasil dilaporkan untuk ditinjau ulang.'],
-        'x': ['✅', 'Konfirmasi: Laporan X (Twitter) Anda telah diterima dan ID laporan telah diterbitkan.'],
-        'wa': ['✅', 'Sukses! Nomor WhatsApp telah ditandai dalam sistem pengawasan keamanan kami.']
-    };
-
-    g.innerText = _res[_0x_curPlat][0];
-    m.innerHTML = `<b>${_res[_0x_curPlat][1]}</b><br><br><small>Laporan ID: #${Math.floor(Math.random() * 900000) + 100000}</small>`;
-}
-
-function toggleMode() {
-    const b = document.body;
-    const c = b.getAttribute("data-theme");
-    b.setAttribute("data-theme", c === "light" ? "dark" : "light");
+function _0x99a1() {
+    const _0x_body = document.body;
+    _0x_body.setAttribute("data-theme", _0x_body.getAttribute("data-theme") === "light" ? "dark" : "light");
 }
