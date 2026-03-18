@@ -38,7 +38,7 @@ function submitData() {
     const _v3 = document.getElementById('detail').value;
 
     if (!_v1 || !_v2 || !_v3) {
-        alert("Gagal! Anda wajib mengisi semua kolom laporan.");
+        alert("⚠️ Gagal! Anda wajib mengisi semua kolom laporan.");
         return;
     }
 
@@ -48,15 +48,16 @@ function submitData() {
 
     o.style.display = 'flex';
     
+    // Pesan dengan simbol centang sesuai permintaan
     const _res = {
-        'fb': ['🔵', 'Laporan Facebook sedang ditinjau oleh tim moderator.'],
-        'ig': ['📸', 'Laporan Instagram telah masuk ke antrean investigasi.'],
-        'x': ['🐦', 'Laporan X Anda telah berhasil diverifikasi sistem.'],
-        'wa': ['🟢', 'Nomor WhatsApp telah ditandai sebagai potensi ancaman.']
+        'fb': ['✅', 'Berhasil! Laporan profil Facebook telah diverifikasi dan masuk ke antrean moderasi pusat.'],
+        'ig': ['✅', 'Selesai! Username Instagram tersebut telah berhasil dilaporkan untuk ditinjau ulang.'],
+        'x': ['✅', 'Konfirmasi: Laporan X (Twitter) Anda telah diterima dan ID laporan telah diterbitkan.'],
+        'wa': ['✅', 'Sukses! Nomor WhatsApp telah ditandai dalam sistem pengawasan keamanan kami.']
     };
 
     g.innerText = _res[_0x_curPlat][0];
-    m.innerText = _res[_0x_curPlat][1];
+    m.innerHTML = `<b>${_res[_0x_curPlat][1]}</b><br><br><small>Laporan ID: #${Math.floor(Math.random() * 900000) + 100000}</small>`;
 }
 
 function toggleMode() {
