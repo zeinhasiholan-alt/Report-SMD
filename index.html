@@ -3,61 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SafetyHub v4.0 - Secure Reporting</title>
+    <title>SafetyHub Pro - Secure Portal</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
-<body data-theme="light" oncontextmenu="return false;">
+<body data-theme="dark" oncontextmenu="return false;">
 
     <div class="app-wrapper">
         <header class="main-header">
-            <div class="logo-brand">🛡️ SAFETY<b>HUB</b></div>
+            <div class="logo-brand">REPORT<span>SMD</span></div>
             
             <nav class="top-nav">
-                <div id="item-fb" class="nav-btn active" onclick="switchMode('fb')">Facebook</div>
-                <div id="item-ig" class="nav-btn" onclick="switchMode('ig')">Instagram</div>
-                <div id="item-x" class="nav-btn" onclick="switchMode('x')">X (Twitter)</div>
-                <div id="item-wa" class="nav-btn" onclick="switchMode('wa')">WhatsApp</div>
+                <button id="item-fb" class="nav-btn active" onclick="switchMode('fb')">Facebook</button>
+                <button id="item-ig" class="nav-btn" onclick="switchMode('ig')">Instagram</button>
+                <button id="item-x" class="nav-btn" onclick="switchMode('x')">X (Twitter)</button>
+                <button id="item-wa" class="nav-btn" onclick="switchMode('wa')">WhatsApp</button>
             </nav>
 
-            <button class="theme-circle" onclick="toggleTheme()">🌓</button>
+            <button class="theme-toggle" onclick="toggleTheme()">
+                <span class="mode-icon">🌙</span>
+            </button>
         </header>
 
         <main class="content-area">
             <div class="report-container">
-                <div class="info-banner">
-                    <span id="breadcrumb">Tools / Facebook</span>
-                    <span class="status-dot">SECURE SESSION</span>
+                <div class="info-bar">
+                    <div id="breadcrumb">TOOLS / FACEBOOK</div>
+                    <div class="security-tag">● ENCRYPTED SESSION</div>
                 </div>
 
                 <div class="report-card">
-                    <h2 id="form-title">Laporan Akun Facebook</h2>
-                    <p class="desc">Lengkapi formulir di bawah untuk mengirim laporan ke pusat keamanan.</p>
+                    <h1 id="form-title">Laporan Akun Facebook</h1>
+                    <p class="desc">Gunakan formulir ini untuk melaporkan aktivitas mencurigakan atau pelanggaran kebijakan komunitas.</p>
 
                     <form id="reportForm">
-                        <div class="grid-inputs">
-                            <div class="input-box">
-                                <label id="input-label">URL Profil Target:</label>
+                        <div class="form-grid">
+                            <div class="input-group">
+                                <label id="input-label">URL Profil Target</label>
                                 <input type="text" name="target" id="target" placeholder="https://facebook.com/..." required>
                             </div>
                             
-                            <div class="input-box">
-                                <label>Kategori Pelanggaran:</label>
+                            <div class="input-group">
+                                <label>Kategori Laporan</label>
                                 <select name="reason" id="reason" required>
                                     <option value="" disabled selected>Pilih Kategori</option>
                                     <option value="Fraud">Penipuan / Scam</option>
                                     <option value="Fake">Akun Palsu</option>
-                                    <option value="Harassment">Pelecehan / Gangguan</option>
+                                    <option value="Hate">Ujaran Kebencian</option>
                                 </select>
                             </div>
                         </div>
 
-                        <div class="input-box">
-                            <label>Kronologi Lengkap:</label>
-                            <textarea name="detail" id="detail" rows="6" placeholder="Tuliskan detail kejadian di sini..." required></textarea>
+                        <div class="input-group">
+                            <label>Deskripsi Kronologi</label>
+                            <textarea name="detail" id="detail" rows="5" placeholder="Ceritakan detail kejadian secara singkat dan jelas..." required></textarea>
                         </div>
 
-                        <button type="submit" id="submitBtn" class="btn-main">KIRIM LAPORAN SEKARANG</button>
+                        <button type="submit" id="submitBtn" class="btn-submit">KIRIM LAPORAN KE SERVER</button>
                     </form>
                 </div>
             </div>
@@ -66,10 +68,10 @@
 
     <div id="overlay" class="overlay">
         <div class="popup">
-            <div class="success-icon">✅</div>
-            <h3>Berhasil Terkirim</h3>
+            <div class="icon-check">✓</div>
+            <h3>Data Berhasil Dikirim</h3>
             <p id="modalMsg"></p>
-            <button class="btn-main" style="background:#111; margin-top:15px" onclick="location.reload()">KEMBALI</button>
+            <button class="btn-close" onclick="location.reload()">Tutup Jendela</button>
         </div>
     </div>
 
