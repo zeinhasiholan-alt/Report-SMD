@@ -11,24 +11,16 @@ const CONFIG = {
 function switchMode(platform) {
     const data = CONFIG.MODELS[platform];
     
-    // Update Sidebar UI
-    document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+    // Update Nav UI
+    document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
     document.getElementById(`item-${platform}`).classList.add('active');
 
-    // Update Content with simple transition
-    const elements = {
-        title: document.getElementById('form-title'),
-        label: document.getElementById('input-label'),
-        bread: document.getElementById('breadcrumb'),
-        btn: document.getElementById('submitBtn'),
-        input: document.getElementById('target')
-    };
-
-    elements.title.innerText = data.title;
-    elements.label.innerText = data.label;
-    elements.bread.innerText = data.bread;
-    elements.btn.style.backgroundColor = data.color;
-    elements.input.placeholder = data.placeholder;
+    // Update Content
+    document.getElementById('form-title').innerText = data.title;
+    document.getElementById('input-label').innerText = data.label;
+    document.getElementById('breadcrumb').innerText = data.bread;
+    document.getElementById('submitBtn').style.backgroundColor = data.color;
+    document.getElementById('target').placeholder = data.placeholder;
 }
 
 function toggleTheme() {
@@ -54,24 +46,20 @@ document.getElementById('reportForm').addEventListener('submit', async function(
 
         if (response.ok) {
             document.getElementById('overlay').style.display = 'flex';
-            document.getElementById('modalMsg').innerHTML = `Laporan berhasil dienkripsi dan dikirim.<br><b>ID: #SR-${Math.floor(10000 + Math.random() * 90000)}</b>`;
+            document.getElementById('modalMsg').innerHTML = `Laporan telah dienkripsi.<br>ID Referensi: <b>#SH-${Math.floor(10000 + Math.random() * 90000)}</b>`;
             this.reset();
-        } else {
-            alert("Terjadi kesalahan pada server API.");
         }
     } catch (err) {
-        alert("Gagal terhubung ke server.");
+        alert("Terjadi kegagalan koneksi.");
     } finally {
         btn.innerText = originalText;
         btn.disabled = false;
     }
 });
 
-// Security: Disable Inspect Element
+// Security
 document.addEventListener('keydown', function(e) {
-    if (e.keyCode == 123 || 
-       (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) || 
-       (e.ctrlKey && e.keyCode == 85)) {
+    if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) || (e.ctrlKey && e.keyCode == 85)) {
         e.preventDefault();
         return false;
     }
